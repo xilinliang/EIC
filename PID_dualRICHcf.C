@@ -582,7 +582,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 
 	PIDnum = TMath::Abs(PIDnum);
 
-			cout<<"LINE = "<<__LINE__<<endl;	
+	//cout<<"LINE = "<<__LINE__<<endl;	
 	h1PIDTrkE->Fill(dualRICHcfTrack->P4().E());
 	h1PIDTrkEta->Fill(dualRICHcfTrack->P4().Eta());
 
@@ -773,7 +773,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 				{
 	
 					dualRICHcfTrack = (Track*)branchdualRICHcfTrack->At(Pi_PID[PIDi]);
-					if (track->Particle == dualRICHcfTrack->Particle) {isMatch = 1;++matchPi_PID; h1Pi_matchTrkZ->Fill(z); h1Pi_matchTrkE->Fill(track->P4().E());}
+					if (track->Particle.GetObject() == dualRICHcfTrack->Particle.GetObject()) {isMatch = 1;++matchPi_PID; h1Pi_matchTrkZ->Fill(z); h1Pi_matchTrkE->Fill(track->P4().E());}
 					if (track->P4().E() == dualRICHcfTrack->P4().E()) 
 					{
 						cout<<"same track"<<endl;
@@ -792,7 +792,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	                        {
 	
 	                                dualRICHcfTrack = (Track*)branchdualRICHcfTrack->At(K_PID[PIDi]);
-	                                if (track->Particle == dualRICHcfTrack->Particle) {isMatch = 1;++matchK_PID; h1K_matchTrkZ->Fill(z); h1K_matchTrkE->Fill(track->P4().E());}
+	                                if (track->Particle.GetObject() == dualRICHcfTrack->Particle.GetObject()) {isMatch = 1;++matchK_PID; h1K_matchTrkZ->Fill(z); h1K_matchTrkE->Fill(track->P4().E());}
 					if (track->P4().E() == dualRICHcfTrack->P4().E()) 
 					{
 						if (isMatch != 1) { h1K_notidTrkZ->Fill(z); h1K_notidTrkE->Fill(track->P4().E()); }
@@ -809,7 +809,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	                        {
 	
 	                                dualRICHcfTrack = (Track*)branchdualRICHcfTrack->At(Pr_PID[PIDi]);
-	                                if (track->Particle == dualRICHcfTrack->Particle) {isMatch = 1; ++matchPr_PID; h1Pr_matchTrkZ->Fill(z); h1Pr_matchTrkE->Fill(track->P4().E());}
+	                                if (track->Particle.GetObject() == dualRICHcfTrack->Particle.GetObject()) {isMatch = 1; ++matchPr_PID; h1Pr_matchTrkZ->Fill(z); h1Pr_matchTrkE->Fill(track->P4().E());}
 					if (track->P4().E() == dualRICHcfTrack->P4().E()) 
 					{
 						if (isMatch != 1) { h1Pr_notidTrkZ->Fill(z); h1Pr_notidTrkE->Fill(track->P4().E()); }
@@ -827,7 +827,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	                        {
 	
 	                                dualRICHcfTrack = (Track*)branchdualRICHcfTrack->At(E_PID[PIDi]);
-	                                if (track->Particle == dualRICHcfTrack->Particle) {isMatch =1; ++matchE_PID; h1E_matchTrkZ->Fill(z); h1E_matchTrkE->Fill(track->P4().E());}
+	                                if (track->Particle.GetObject() == dualRICHcfTrack->Particle.GetObject()) {isMatch =1; ++matchE_PID; h1E_matchTrkZ->Fill(z); h1E_matchTrkE->Fill(track->P4().E());}
 					else {h1E_nomatchTrkZ->Fill(z); h1E_nomatchTrkE->Fill(track->P4().E());}
 
 	                        }

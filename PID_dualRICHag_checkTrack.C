@@ -651,7 +651,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	{
 
 		dualRICHagTrack = (Track*)branchdualRICHagTrack->At(Pi_PID[j]);
-		if (EFlowTrack->Particle == dualRICHagTrack->Particle) {checkmatch = 1;}
+		if (EFlowTrack->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {checkmatch = 1;}
 		if ((EFlowTrack->P4().E() == dualRICHagTrack->P4().E()) && (checkmatch != 1)) {checkmatch = 2;}
 		j=j+1;		
 
@@ -675,7 +675,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	{
 
 		dualRICHagTrack = (Track*)branchdualRICHagTrack->At(K_PID[j]);
-		if (EFlowTrack->Particle == dualRICHagTrack->Particle) {checkmatch = 1;}
+		if (EFlowTrack->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {checkmatch = 1;}
 		if ((EFlowTrack->P4().E() == dualRICHagTrack->P4().E()) && (checkmatch != 1)) {checkmatch = 2;}
 		j=j+1;		
 
@@ -699,7 +699,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	{
 
 		dualRICHagTrack = (Track*)branchdualRICHagTrack->At(Pr_PID[j]);
-		if (EFlowTrack->Particle == dualRICHagTrack->Particle) {checkmatch = 1;}
+		if (EFlowTrack->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {checkmatch = 1;}
 		if ((EFlowTrack->P4().E() == dualRICHagTrack->P4().E()) && (checkmatch != 1)) {checkmatch = 2;}
 		j=j+1;		
 
@@ -878,7 +878,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 				{
 	
 					dualRICHagTrack = (Track*)branchdualRICHagTrack->At(Pi_PID[PIDi]);
-					if (track->Particle == dualRICHagTrack->Particle) 
+					if (track->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) 
 					{isMatch = 1; Pi_checkmatch[PIDi]=999; ++matchPi_PID; h1Pi_matchTrkZ->Fill(z); h1Pi_matchTrkE->Fill(track->P4().E());}
 
 //					if (track->P4().E() == dualRICHagTrack->P4().E()) 
@@ -900,7 +900,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	                        {
 	
 	                                dualRICHagTrack = (Track*)branchdualRICHagTrack->At(K_PID[PIDi]);
-	                                if (track->Particle == dualRICHagTrack->Particle) {isMatch = 1; K_checkmatch[PIDi]=999; ++matchK_PID; h1K_matchTrkZ->Fill(z); h1K_matchTrkE->Fill(track->P4().E());}
+	                                if (track->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {isMatch = 1; K_checkmatch[PIDi]=999; ++matchK_PID; h1K_matchTrkZ->Fill(z); h1K_matchTrkE->Fill(track->P4().E());}
 
 //					if (track->P4().E() == dualRICHagTrack->P4().E())
 //                                        {
@@ -919,7 +919,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	                        {
 	
 	                                dualRICHagTrack = (Track*)branchdualRICHagTrack->At(Pr_PID[PIDi]);
-	                                if (track->Particle == dualRICHagTrack->Particle) {isMatch = 1; Pr_checkmatch[PIDi]=999;  ++matchPr_PID; h1Pr_matchTrkZ->Fill(z); h1Pr_matchTrkE->Fill(track->P4().E());}
+	                                if (track->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {isMatch = 1; Pr_checkmatch[PIDi]=999;  ++matchPr_PID; h1Pr_matchTrkZ->Fill(z); h1Pr_matchTrkE->Fill(track->P4().E());}
 
 //					if (track->P4().E() == dualRICHagTrack->P4().E())
 //                                        {
@@ -938,7 +938,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	                        {
 	
 	                                dualRICHagTrack = (Track*)branchdualRICHagTrack->At(E_PID[PIDi]);
-	                                if (track->Particle == dualRICHagTrack->Particle) {isMatch = 1; E_checkmatch[PIDi]=999;  ++matchE_PID; h1E_matchTrkZ->Fill(z); h1E_matchTrkE->Fill(track->P4().E());}
+	                                if (track->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {isMatch = 1; E_checkmatch[PIDi]=999;  ++matchE_PID; h1E_matchTrkZ->Fill(z); h1E_matchTrkE->Fill(track->P4().E());}
 //					if (track->P4().E() == dualRICHagTrack->P4().E())
 //                                        {
 //                                                if (E_checkmatch[PIDi] != 999) {isMatch = 1; E_checkmatch[PIDi]=j; h1E_nomatchTrkZ->Fill(z); h1E_nomatchTrkE->Fill(track->P4().E()); }
