@@ -68,6 +68,11 @@ struct TestPlots
     TH1 *h1checknomatchTrkE;
     TH1 *h1checkmatchTrkE;
 
+    TH1 *h1PIDTrkE;
+    TH1 *h1JetTrkE;
+    TH1 *h1PIDTrkEta;
+    TH1 *h1JetTrkEta;
+
     TH2 *h2Pi_purity_vs_z;
     TH2 *h2Pi_purity_vs_z_E10_20;
     TH2 *h2Pi_purity_vs_z_E20_40;
@@ -76,13 +81,14 @@ struct TestPlots
     TH2 *h2Pi_purity_vs_E;
     TH1 *h1Pi_matchTrkE;
     TH1 *h1Pi_matchTrkZ;
-    TH1 *h1Pi_checkmatchTrkE;
-    TH1 *h1Pi_checkmatchTrkZ;
     TH1 *h1Pi_nomatchTrkE;
+    TH1 *h1Pi_notidTrkE;
     TH1 *h1Pi_nomatchTrkZ;
+    TH1 *h1Pi_notidTrkZ;
     TH1 *h1Pi_checknomatchTrkE;
-    TH1 *h1Pi_checkmismatchTrkE;
+    TH1 *h1Pi_checkmatchTrkE;
     TH1 *h1Pi_checknomatchTrkZ;
+    TH1 *h1Pi_checkmatchTrkZ;
 
     TH2 *h2K_purity_vs_z;
     TH2 *h2K_purity_vs_z_E10_20;
@@ -92,13 +98,14 @@ struct TestPlots
     TH2 *h2K_purity_vs_E;
     TH1 *h1K_matchTrkE;
     TH1 *h1K_matchTrkZ;
-    TH1 *h1K_checkmatchTrkE;
-    TH1 *h1K_checkmatchTrkZ;
     TH1 *h1K_nomatchTrkE;
     TH1 *h1K_nomatchTrkZ;
+    TH1 *h1K_notidTrkE;
+    TH1 *h1K_notidTrkZ;
     TH1 *h1K_checknomatchTrkE;
-    TH1 *h1K_checkmismatchTrkE;
+    TH1 *h1K_checkmatchTrkE;
     TH1 *h1K_checknomatchTrkZ;
+    TH1 *h1K_checkmatchTrkZ;
 
     TH2 *h2Pr_purity_vs_z;
     TH2 *h2Pr_purity_vs_z_E10_20;
@@ -108,13 +115,14 @@ struct TestPlots
     TH2 *h2Pr_purity_vs_E;
     TH1 *h1Pr_matchTrkE;
     TH1 *h1Pr_matchTrkZ;
-    TH1 *h1Pr_checkmatchTrkE;
-    TH1 *h1Pr_checkmatchTrkZ;
     TH1 *h1Pr_nomatchTrkE;
     TH1 *h1Pr_nomatchTrkZ;
+    TH1 *h1Pr_notidTrkE;
+    TH1 *h1Pr_notidTrkZ;
     TH1 *h1Pr_checknomatchTrkE;
-    TH1 *h1Pr_checkmismatchTrkE;
+    TH1 *h1Pr_checkmatchTrkE;
     TH1 *h1Pr_checknomatchTrkZ;
+    TH1 *h1Pr_checkmatchTrkZ;
 
     TH2 *h2E_purity_vs_z;
     TH2 *h2E_purity_vs_z_E10_20;
@@ -126,8 +134,6 @@ struct TestPlots
     TH1 *h1E_matchTrkZ;
     TH1 *h1E_nomatchTrkE;
     TH1 *h1E_nomatchTrkZ;
-
-    TH1 *h1TrackP;
 
 
 };
@@ -148,13 +154,19 @@ void BookHistograms(ExRootResult *result, TestPlots *plots)
 
   TPaveText *comment;
 
+  plots->h1PIDTrkE = result->AddHist1D("h1PIDTrkE","all PID track E","E [GeV]","events",100,0,30.);
+  plots->h1JetTrkE = result->AddHist1D("h1JetTrkE","all track in PID coverage E","E [GeV]","events",100,0,30.);
+  plots->h1checknomatchTrkE = result->AddHist1D("h1checknomatchTrkE","no match EFlow track energy","E [GeV]","events",100,0.,40.);
+  plots->h1checkmatchTrkE = result->AddHist1D("h1checkmatchTrkE","match EFlow track energy","E [GeV]","events",100,0.,40.);
+
+  plots->h1PIDTrkEta = result->AddHist1D("h1PIDTrkEta","all PID track Eta","Eta","events",50,1,3.5);
+  plots->h1JetTrkEta = result->AddHist1D("h1JetTrkEta","all track in PID coverage Eta","Eta","events",50,1,3.5);
+
   plots->h1matchTrkZ = result->AddHist1D("h1matchTrkZ","match track fraction z","z","events",20,0,1);
-  plots->h1matchTrkE = result->AddHist1D("h1matchTrkE","match track energy","E [GeV]","events",100,0,80.);
+  plots->h1matchTrkE = result->AddHist1D("h1matchTrkE","match track energy","E [GeV]","events",100,0,30.);
 
   plots->h1nomatchTrkZ = result->AddHist1D("h1nomatchTrkZ","no match track fraction z","z","events",20,0,1);
-  plots->h1nomatchTrkE = result->AddHist1D("h1nomatchTrkE","no match track energy","E [GeV]","events",100,0.,80.);
-  plots->h1checknomatchTrkE = result->AddHist1D("h1checknomatchTrkE","no match EFlow track energy","E [GeV]","events",50,0.,12.);
-  plots->h1checkmatchTrkE = result->AddHist1D("h1checkmatchTrkE","match EFlow track energy ","E [GeV]","events",50,0.,12.);
+  plots->h1nomatchTrkE = result->AddHist1D("h1nomatchTrkE","no match track energy","E [GeV]","events",100,0,30.);
 
 
   plots->h1Pi_purity = result->AddHist1D("h1Pi_purity","Pion purity" , "pion purity" , "events" , 20,0,1.01);
@@ -165,14 +177,15 @@ void BookHistograms(ExRootResult *result, TestPlots *plots)
   plots->h2Pi_purity_vs_z_E60_80 = result->AddHist2D("h2Pi_purity_vs_z_E60_80","Pion purity vs z (60 < E < 80 GeV)" , "z" , "pion purity"  , 20,0,1,20,0,1.01);
   plots->h2Pi_purity_vs_E = result->AddHist2D("h2Pi_purity_vs_E","Pion purity vs jet E","jet E [GeV]","pion purity",80,10,90,20,0,1.01);
   plots->h1Pi_matchTrkZ = result->AddHist1D("h1Pi_matchTrkZ","match Pion track fraction z","z","events",20,0,1.);
-  plots->h1Pi_matchTrkE = result->AddHist1D("h1Pi_matchTrkE","match Pion track energy","E [GeV]","events",100,0,20.);
-  plots->h1Pi_checkmatchTrkE = result->AddHist1D("h1Pi_checkmatchTrkE","match EFlow Pion track energy","E [GeV]","events",50,0,12.);
+  plots->h1Pi_matchTrkE = result->AddHist1D("h1Pi_matchTrkE","match Pion track energy","E [GeV]","events",100,0.,30.);
   plots->h1Pi_nomatchTrkZ = result->AddHist1D("h1Pi_nomatchTrkZ","no match Pion track fraction z","z","events",20,0,1.);
-  plots->h1Pi_nomatchTrkE = result->AddHist1D("h1Pi_nomatchTrkE","no match Pion track energy","E [GeV]","events",50,0,12.);
-  plots->h1Pi_checknomatchTrkE = result->AddHist1D("h1Pi_checknomatchTrkE","no match EFlow Pion track energy ","E [GeV]","events",50,0,12.);
-  plots->h1Pi_checkmismatchTrkE = result->AddHist1D("h1Pi_checkmismatchTrkE","mismatch Pion track energy (for check)","E [GeV]","events",50,0,12.);
-  plots->h1Pi_checkmatchTrkZ = result->AddHist1D("h1Pi_checkmatchTrkZ","match EFlow Pion track energy fraction z","z","events",20,0,1.);
-  plots->h1Pi_checknomatchTrkZ = result->AddHist1D("h1Pi_checknomatchTrkZ","no match EFlow Pion track energy fraction z","z","events",20,0,1.);
+  plots->h1Pi_notidTrkZ = result->AddHist1D("h1Pi_notidTrkZ","misidentify Pion track fraction z","z","events",20,0,1.);
+  plots->h1Pi_nomatchTrkE = result->AddHist1D("h1Pi_nomatchTrkE","no match Pion track energy","E [GeV]","events",100,0.,30.);
+  plots->h1Pi_notidTrkE = result->AddHist1D("h1Pi_notidTrkE","misidentify Pion track energy","E [GeV]","events",100,0.,30.);
+  plots->h1Pi_checkmatchTrkE = result->AddHist1D("h1Pi_checkmatchTrkE","match Pion track energy ","E [GeV]","events",100,0.,50.);
+  plots->h1Pi_checknomatchTrkE = result->AddHist1D("h1Pi_checknomatchTrkE","no match Pion track energy","E [GeV]","events",100,0.,50.);
+  plots->h1Pi_checkmatchTrkZ = result->AddHist1D("h1Pi_checkmatchTrkZ","match Pion track energy fraction z","z","events",20,0,1.);
+  plots->h1Pi_checknomatchTrkZ = result->AddHist1D("h1Pi_checknomatchTrkZ","no match Pion track energy fraction z","z","events",20,0,1.);
 
 
   plots->h1K_purity = result->AddHist1D("h1K_purity","Kaon purity" , "kaon purity" , "events" , 20,0,1.01);
@@ -183,14 +196,15 @@ void BookHistograms(ExRootResult *result, TestPlots *plots)
   plots->h2K_purity_vs_z_E60_80 = result->AddHist2D("h2K_purity_vs_z_E60_80","Kaon purity vs z (60 < E < 80 GeV)" , "z" , "Kaon purity"  , 20,0,1,20,0,1.01);
   plots->h2K_purity_vs_E = result->AddHist2D("h2K_purity_vs_E","Kaon purity vs jet E","jet E [GeV]","Kaon purity",80,10,90,20,0,1.01);
   plots->h1K_matchTrkZ = result->AddHist1D("h1K_matchTrkZ","match Kaon track fraction z","z","events",20,0,1.);
-  plots->h1K_matchTrkE = result->AddHist1D("h1K_matchTrkE","match Kaon track energy","E [GeV]","events",100,0,20.);
-  plots->h1K_checkmatchTrkE = result->AddHist1D("h1K_checkmatchTrkE","match EFlow Kaon track energy","E [GeV]","events",50,0,12.);
+  plots->h1K_matchTrkE = result->AddHist1D("h1K_matchTrkE","match Kaon track energy","E [GeV]","events",100,0.,30.);
   plots->h1K_nomatchTrkZ = result->AddHist1D("h1K_nomatchTrkZ","no match Kaon track fraction z","z","events",20,0,1.);
-  plots->h1K_nomatchTrkE = result->AddHist1D("h1K_nomatchTrkE","no match Kaon track energy","E [GeV]","events",50,0,12.);
-  plots->h1K_checknomatchTrkE = result->AddHist1D("h1K_checknomatchTrkE","no match EFlow Kaon track energy ","E [GeV]","events",50,0,12.);
-  plots->h1K_checkmismatchTrkE = result->AddHist1D("h1K_checkmismatchTrkE","mismatch Kaon track energy (for check)","E [GeV]","events",50,0,12.);
-  plots->h1K_checkmatchTrkZ = result->AddHist1D("h1K_checkmatchTrkZ","match EFlow Kaon track energy fraction z","z","events",20,0,1.);
-  plots->h1K_checknomatchTrkZ = result->AddHist1D("h1K_checknomatchTrkZ","no match EFlow Kaon track energy fraction z","z","events",20,0,1.);
+  plots->h1K_nomatchTrkE = result->AddHist1D("h1K_nomatchTrkE","no match Kaon track energy","E [GeV]","events",100,0.,30.);
+  plots->h1K_notidTrkZ = result->AddHist1D("h1K_notidTrkZ","misidentify Kaon track fraction z","z","events",20,0,1.);
+  plots->h1K_notidTrkE = result->AddHist1D("h1K_notidTrkE","misidentify Kaon track energy","E [GeV]","events",100,0.,30.);
+  plots->h1K_checkmatchTrkE = result->AddHist1D("h1K_checkmatchTrkE","match Kaon track energy ","E [GeV]","events",100,0.,50.);
+  plots->h1K_checknomatchTrkE = result->AddHist1D("h1K_checknomatchTrkE","no match Kaon track energy ","E [GeV]","events",100,0.,50.);
+  plots->h1K_checkmatchTrkZ = result->AddHist1D("h1K_checkmatchTrkZ","match Kaon track energy fraction z","z","events",20,0,1.);
+  plots->h1K_checknomatchTrkZ = result->AddHist1D("h1K_checknomatchTrkZ","no match Kaon track energy fraction z","z","events",20,0,1.);
 
 
   plots->h1Pr_purity = result->AddHist1D("h1Pr_purity","Proton purity" , "proton purity" , "events" , 20,0,1.01);
@@ -200,15 +214,16 @@ void BookHistograms(ExRootResult *result, TestPlots *plots)
   plots->h2Pr_purity_vs_z_E40_60 = result->AddHist2D("h2Pr_purity_vs_z_E40_60","(anti)proton purity vs z (40 < E < 60 GeV)" , "z" , "(anti)proton purity"  , 20,0,1,20,0,1.01);
   plots->h2Pr_purity_vs_z_E60_80 = result->AddHist2D("h2Pr_purity_vs_z_E60_80","(anti)proton purity vs z (60 < E < 80 GeV)" , "z" , "(anti)proton purity"  , 20,0,1,20,0,1.01);
   plots->h2Pr_purity_vs_E = result->AddHist2D("h2Pr_purity_vs_E","Proton purity vs jet E","jet E [GeV]","proton purity",80,10,90,20,0,1.01);
-  plots->h1Pr_matchTrkZ = result->AddHist1D("h1Pr_matchTrkZ","match Pion track fraction z","z","events",20,0,1.);
-  plots->h1Pr_matchTrkE = result->AddHist1D("h1Pr_matchTrkE","match Pion track energy","E [GeV]","events",100,0,20.);
-  plots->h1Pr_checkmatchTrkE = result->AddHist1D("h1Pr_checkmatchTrkE","match EFlow Proton track energy ","E [GeV]","events",50,0,12.);
-  plots->h1Pr_nomatchTrkZ = result->AddHist1D("h1Pr_nomatchTrkZ","no match Proton track fraction z","z","events",20,0,1.);
-  plots->h1Pr_nomatchTrkE = result->AddHist1D("h1Pr_nomatchTrkE","no match Proton track energy","E [GeV]","events",100,0,20.);
-  plots->h1Pr_checknomatchTrkE = result->AddHist1D("h1Pr_checknomatchTrkE","no match EFlow Proton track energy ","E [GeV]","events",50,0,12.);
-  plots->h1Pr_checkmismatchTrkE = result->AddHist1D("h1Pr_checkmismatchTrkE","mismatch Proton track energy (for check)","E [GeV]","events",50,0,12.);
-  plots->h1Pr_checkmatchTrkZ = result->AddHist1D("h1Pr_checkmatchTrkZ","match EFlow Proton track energy fraction z","z","events",20,0,1.);
-  plots->h1Pr_checknomatchTrkZ = result->AddHist1D("h1Pr_checknomatchTrkZ","no match EFlow Proton track energy fraction z","z","events",20,0,1.);
+  plots->h1Pr_matchTrkZ = result->AddHist1D("h1Pr_matchTrkZ","match Proton track fraction z","z","events",20,0,1);
+  plots->h1Pr_matchTrkE = result->AddHist1D("h1Pr_matchTrkE","match Proton track energy","E [GeV]","events",100,0.,30.);
+  plots->h1Pr_nomatchTrkZ = result->AddHist1D("h1Pr_nomatchTrkZ","no match Proton track fraction z","z","events",20,0,1);
+  plots->h1Pr_nomatchTrkE = result->AddHist1D("h1Pr_nomatchTrkE","no match Proton track energy","E [GeV]","events",100,0.,30.);
+  plots->h1Pr_notidTrkZ = result->AddHist1D("h1Pr_notidTrkZ","misidentify proton track fraction z","z","events",20,0,1.);
+  plots->h1Pr_notidTrkE = result->AddHist1D("h1Pr_notidTrkE","misidentify proton track energy","E [GeV]","events",100,0.,30.);
+  plots->h1Pr_checkmatchTrkE = result->AddHist1D("h1Pr_checkmatchTrkE","match Proton track energy ","E [GeV]","events",100,0.,50.);
+  plots->h1Pr_checknomatchTrkE = result->AddHist1D("h1Pr_checknomatchTrkE","no match Proton track energy ","E [GeV]","events",100,0.,50.);
+  plots->h1Pr_checkmatchTrkZ = result->AddHist1D("h1Pr_checkmatchTrkZ","match Proton track energy fraction z","z","events",20,0,1);
+  plots->h1Pr_checknomatchTrkZ = result->AddHist1D("h1Pr_checknomatchTrkZ","no match Proton track energy fraction z","z","events",20,0,1);
 
 
   plots->h1E_purity = result->AddHist1D("h1E_purity","electron purity" , "electron purity" , "events" , 20,0,1.01);
@@ -219,11 +234,10 @@ void BookHistograms(ExRootResult *result, TestPlots *plots)
   plots->h2E_purity_vs_z_E60_80 = result->AddHist2D("h2E_purity_vs_z_E60_80","electron (positron) purity vs z (60 < E < 80 GeV)" , "z" , "electron (positron) purity"  , 20,0,1,20,0,1.01);
   plots->h2E_purity_vs_E = result->AddHist2D("h2E_purity_vs_E","electron purity vs jet E","jet E [GeV]","electron purity",80,10,90,20,0,1.01);
   plots->h1E_matchTrkZ = result->AddHist1D("h1E_matchTrkZ","match electron track fraction z","z","events",20,0,1.);
-  plots->h1E_matchTrkE = result->AddHist1D("h1E_matchTrkE","match electron track energy","E [GeV]","events",100,0,20.);
+  plots->h1E_matchTrkE = result->AddHist1D("h1E_matchTrkE","match electron track energy","E [GeV]","events",100,0.,30.);
   plots->h1E_nomatchTrkZ = result->AddHist1D("h1E_nomatchTrkZ","no match electron track fraction z","z","events",20,0,1.);
-  plots->h1E_nomatchTrkE = result->AddHist1D("h1E_nomatchTrkE","no match electron track energy","E [GeV]","events",100,0,20.);
+  plots->h1E_nomatchTrkE = result->AddHist1D("h1E_nomatchTrkE","no match electron track energy","E [GeV]","events",100,0.,30.);
 
-  plots->h1TrackP = result->AddHist1D("h1TrackP","track momentum","P [GeV]","events",100,0,20);
 
 }
 
@@ -244,8 +258,6 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 
   TClonesArray *branchEFlowTrack = treeReader->UseBranch("EFlowTrack");
 
-  TClonesArray *branchTrack = treeReader->UseBranch("Track");
-
   TClonesArray *branchEFlowPhoton = treeReader->UseBranch("EFlowPhoton");
 
   TClonesArray *branchEFlowNeutralHadron = treeReader->UseBranch("EFlowNeutralHadron");
@@ -254,7 +266,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 
   TClonesArray *branchGenJet = treeReader->UseBranch("GenJet");
 
-  TClonesArray *branchdualRICHagTrack = treeReader->UseBranch("dualRICHagTrack"); 
+  TClonesArray *branchbarrelDIRCTrack = treeReader->UseBranch("barrelDIRCTrack"); 
 
   Long64_t allEntries = treeReader->GetEntries();
 
@@ -274,7 +286,6 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
   
   Track *EFlowTrack;
  
-  Track *SmearTrack;
 
   Track *track;
 
@@ -298,6 +309,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 
 
 
+
   Float_t Eem, Ehad;
 
   Bool_t skip;
@@ -315,7 +327,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	
   Int_t nPi_PID , nPi_true , nK_PID , nK_true , nPr_PID , nPr_true, nE_PID , nE_true;
 
-  Int_t Pi_PID[30] ,Pi_true[30] , K_PID[30] , K_true[30] , Pr_PID[30] , Pr_true[30] , E_PID[30] , E_true[30], Pi_checkmatch[30] , K_checkmatch[30] ,Pr_checkmatch[30] ,E_checkmatch[30] ;
+  Int_t Pi_PID[30] ,Pi_true[30] , K_PID[30] , K_true[30] , Pr_PID[30] , Pr_true[30] , E_PID[30] , E_true[30];
 
   Int_t matchPi_PID , matchPr_PID , matchK_PID ,matchE_PID ;
   Double_t Pi_purity, Pr_purity, K_purity, E_purity;
@@ -357,13 +369,11 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
     particle = (GenParticle*)branchParticle->At(5);
     OutE = particle->P4();
 
-
     //loop for all Hcal tracks
     for (int i = 0; i < branchEFlowTrack->GetEntries(); ++i) {
       EFlowTrack = (Track*)branchEFlowTrack->At(i);
 
-      if (EFlowTrack->P > 12 || TMath::Abs(EFlowTrack->Eta) < 1.0  || TMath::Abs(EFlowTrack->Eta) > 3.5) continue;
-      if(!(abs(EFlowTrack->PID)==211 || abs(EFlowTrack->PID)==321 || abs(EFlowTrack->PID)==2212 )) continue; //if not a charged pion or kaon or proton or e, continue
+      if (TMath::Abs(EFlowTrack->Eta) > 1 ) continue;
 
 	PIDnum = EFlowTrack->PID;
 
@@ -394,71 +404,82 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 
 	}
 
-	int j=0; int checkmatch=0;
-	while (j < branchdualRICHagTrack->GetEntries() && checkmatch == 0)
-	{
 
-		dualRICHagTrack = (Track*)branchdualRICHagTrack->At(j);
-
-			if (EFlowTrack->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {checkmatch = 1;}
-			j=j+1;
-		
-
-	}
-
-	if (checkmatch == 0) h1checknomatchTrkE->Fill(EFlowTrack->P4().E());
-	if (checkmatch == 1) h1checkmatchTrkE->Fill(EFlowTrack->P4().E());
-
+//	cout<< "PID num true " << PIDnum << endl;
    }
 
-//	trk_in.trk = EFlowTrack;
-//      true_tracks.push_back(trk_in);
     
 
     //loop for all PID system tracks
-    for (int i = 0; i < branchdualRICHagTrack->GetEntries(); ++i) {
-      dualRICHagTrack = (Track*)branchdualRICHagTrack->At(i);
 
-      if (dualRICHagTrack->P > 12 || TMath::Abs(dualRICHagTrack->Eta) < 1.0  || TMath::Abs(dualRICHagTrack->Eta) > 3.5) continue;
+    if (!branchbarrelDIRCTrack) continue;
+   //loop for all Hcal tracks
+    for (int i = 0; i < branchEFlowTrack->GetEntries(); ++i) {
+      EFlowTrack = (Track*)branchEFlowTrack->At(i);
 
-	PIDnum = dualRICHagTrack->PID;
+      if (TMath::Abs(EFlowTrack->Eta) > 1.0) continue;
+      if(!(abs(EFlowTrack->PID)==211 || abs(EFlowTrack->PID)==321 || abs(EFlowTrack->PID)==2212 )) continue; //if not a charged pion or kaon or proton or e, continue
+
+
+	int j=0; int checkmatch=0;
+	while (j < branchbarrelDIRCTrack->GetEntries() && checkmatch == 0)
+		{
+
+		barrelDIRCTrack = (Track*)branchbarrelDIRCTrack->At(j);
+
+		if ((EFlowTrack->PID == barrelDIRCTrack->PID)&&(EFlowTrack->Particle.GetObject() == barrelDIRCTrack->Particle.GetObject())) {checkmatch = 1;}
+			j=j+1;
+		
+
+		}
+	
+	//cout<<"checkmatch="<<checkmatch<<endl;
+	if (checkmatch == 0) h1checknomatchTrkE->Fill(EFlowTrack->P4().E());
+	if (checkmatch == 1) h1checkmatchTrkE->Fill(EFlowTrack->P4().E());
+	}
+
+
+    for (int i = 0; i < branchbarrelDIRCTrack->GetEntries(); ++i) {
+      barrelDIRCTrack = (Track*)branchbarrelDIRCTrack->At(i);
+
+      if (TMath::Abs(barrelDIRCTrack->Eta) > 1.0) continue;
+
+	PIDnum = barrelDIRCTrack->PID;
 
 	PIDnum = TMath::Abs(PIDnum);
 
+	//cout<<"LINE = "<<__LINE__<<endl;	
+	h1PIDTrkE->Fill(barrelDIRCTrack->P4().E());
+	h1PIDTrkEta->Fill(barrelDIRCTrack->P4().Eta());
 
 	switch(PIDnum)
 	{
 
 		case 211 :
 			Pi_PID[nPi_PID] = i ;
-			Pi_checkmatch[nPi_PID]=-1;
 			nPi_PID = nPi_PID +1;
 		break;
 
 		case 321 :
                         K_PID[nK_PID] = i ;
-			K_checkmatch[nK_PID]=-1;
                         nK_PID = nK_PID +1;
                 break;
 
 		case 2212 :
                         Pr_PID[nPr_PID] = i ;
-			Pr_checkmatch[nPr_PID]=-1;
                         nPr_PID = nPr_PID +1;
                 break;
 
 		case 11 :
                         E_PID[nE_PID] = i ;
-			E_checkmatch[nE_PID]=-1;
                         nE_PID = nE_PID +1;
                 break;
 
 	}
-
-
+	
+//	cout<< "PID num PID " << PIDnum << endl;
 
     }
-
 
     matchPi_PID = 0;
     for (int i=0; i< nPi_true; ++i)
@@ -470,19 +491,20 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	EFlowTrackZ = (InPr.Dot(EFlowTrackP4)) / (InPr.Dot(InE - OutE));
 
 	while (checkmatch == 0 && j<nPi_PID)
+	//while (checkmatch == 0 && j<branchbarrelDIRCTrack->GetEntries())
 	{
 
-		dualRICHagTrack = (Track*)branchdualRICHagTrack->At(Pi_PID[j]);
-		if (EFlowTrack->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {checkmatch = 1;}
+		barrelDIRCTrack = (Track*)branchbarrelDIRCTrack->At(Pi_PID[j]);
+		if ((EFlowTrack->Particle.GetObject() == barrelDIRCTrack->Particle.GetObject())) {checkmatch = 1;}
 		j=j+1;		
 
 	}
 	matchPi_PID = matchPi_PID + checkmatch;
+	//cout<<"check match:"<<checkmatch<<endl;
 	if (checkmatch == 0) { h1Pi_checknomatchTrkZ->Fill(EFlowTrackZ); h1Pi_checknomatchTrkE->Fill(EFlowTrack->P4().E());}
 	if (checkmatch == 1) {h1Pi_checkmatchTrkZ->Fill(EFlowTrackZ); h1Pi_checkmatchTrkE->Fill(EFlowTrack->P4().E());}
 
     }
-
 
     matchK_PID = 0;
     for (int i=0; i< nK_true; ++i)
@@ -493,10 +515,11 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	EFlowTrackP4 = EFlowTrack->P4();
 	EFlowTrackZ = (InPr.Dot(EFlowTrackP4)) / (InPr.Dot(InE - OutE));
 	while (checkmatch == 0 && j<nK_PID)
+	//while (checkmatch == 0 && j<branchbarrelDIRCTrack->GetEntries())
 	{
 
-		dualRICHagTrack = (Track*)branchdualRICHagTrack->At(K_PID[j]);
-		if (EFlowTrack->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {checkmatch = 1;}
+		barrelDIRCTrack = (Track*)branchbarrelDIRCTrack->At(K_PID[j]);
+		if ((EFlowTrack->Particle.GetObject() == barrelDIRCTrack->Particle.GetObject())) {checkmatch = 1;}
 		j=j+1;		
 
 	}
@@ -506,7 +529,6 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 
     }
 
-	
     matchPr_PID = 0;
     for (int i=0; i< nPr_true; ++i)
     {
@@ -516,10 +538,11 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	EFlowTrackP4 = EFlowTrack->P4();
 	EFlowTrackZ = (InPr.Dot(EFlowTrackP4)) / (InPr.Dot(InE - OutE));
 	while (checkmatch == 0 && j<nPr_PID)
+	//while (checkmatch == 0 && j<branchbarrelDIRCTrack->GetEntries())
 	{
 
-		dualRICHagTrack = (Track*)branchdualRICHagTrack->At(Pr_PID[j]);
-		if (EFlowTrack->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {checkmatch = 1;}
+		barrelDIRCTrack = (Track*)branchbarrelDIRCTrack->At(Pr_PID[j]);
+		if ((EFlowTrack->Particle.GetObject() == barrelDIRCTrack->Particle.GetObject())) {checkmatch = 1;}
 		j=j+1;		
 
 	}
@@ -530,8 +553,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
     }
 
 
-
-  } //event
+  }
 
 }
 
@@ -559,7 +581,7 @@ void PrintHistograms(ExRootResult *result, TestPlots *plots)
 
 
 
-void PID_dualRICHag_checkTrack(const char *inputFile)
+void PID_barrelDIRCTrack_checkTrack(const char *inputFile)
 
 {
 

@@ -172,8 +172,8 @@ void BookHistograms(ExRootResult *result, TestPlots *plots)
   plots->h2Pr_purity_vs_z_E40_60 = result->AddHist2D("h2Pr_purity_vs_z_E40_60","(anti)proton purity vs z (40 < E < 60 GeV)" , "z" , "(anti)proton purity"  , 20,0,1,20,0,1.01);
   plots->h2Pr_purity_vs_z_E60_80 = result->AddHist2D("h2Pr_purity_vs_z_E60_80","(anti)proton purity vs z (60 < E < 80 GeV)" , "z" , "(anti)proton purity"  , 20,0,1,20,0,1.01);
   plots->h2Pr_purity_vs_E = result->AddHist2D("h2Pr_purity_vs_E","Proton purity vs jet E","jet E [GeV]","proton purity",80,10,90,20,0,1.01);
-  plots->h1Pr_matchTrkZ = result->AddHist1D("h1Pr_matchTrkZ","match Pion track fraction z","z","events",20,0,1.);
-  plots->h1Pr_matchTrkE = result->AddHist1D("h1Pr_matchTrkE","match Pion track energy","E [GeV]","events",100,0,20.);
+  plots->h1Pr_matchTrkZ = result->AddHist1D("h1Pr_matchTrkZ","match Proton track fraction z","z","events",20,0,1.);
+  plots->h1Pr_matchTrkE = result->AddHist1D("h1Pr_matchTrkE","match Proton track energy","E [GeV]","events",100,0,20.);
   plots->h1Pr_nomatchTrkZ = result->AddHist1D("h1Pr_nomatchTrkZ","no match Proton track fraction z","z","events",20,0,1.);
   plots->h1Pr_nomatchTrkE = result->AddHist1D("h1Pr_nomatchTrkE","no match Proton track energy","E [GeV]","events",100,0,20.);
 
@@ -508,7 +508,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 				{
 	
 					dualRICHagTrack = (Track*)branchdualRICHagTrack->At(Pi_PID[PIDi]);
-					if (track->Particle == dualRICHagTrack->Particle) 
+					if (track->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) 
 					{isMatch = 1; Pi_checkmatch[PIDi]=999; ++matchPi_PID; h1Pi_matchTrkZ->Fill(z); h1Pi_matchTrkE->Fill(track->P4().E());}
 
 
@@ -526,7 +526,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	                        {
 	
 	                                dualRICHagTrack = (Track*)branchdualRICHagTrack->At(K_PID[PIDi]);
-	                                if (track->Particle == dualRICHagTrack->Particle) {isMatch = 1; K_checkmatch[PIDi]=999; ++matchK_PID; h1K_matchTrkZ->Fill(z); h1K_matchTrkE->Fill(track->P4().E());}
+	                                if (track->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {isMatch = 1; K_checkmatch[PIDi]=999; ++matchK_PID; h1K_matchTrkZ->Fill(z); h1K_matchTrkE->Fill(track->P4().E());}
 
 
 	                        }
@@ -541,7 +541,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	                        {
 	
 	                                dualRICHagTrack = (Track*)branchdualRICHagTrack->At(Pr_PID[PIDi]);
-	                                if (track->Particle == dualRICHagTrack->Particle) {isMatch = 1; Pr_checkmatch[PIDi]=999;  ++matchPr_PID; h1Pr_matchTrkZ->Fill(z); h1Pr_matchTrkE->Fill(track->P4().E());}
+	                                if (track->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {isMatch = 1; Pr_checkmatch[PIDi]=999;  ++matchPr_PID; h1Pr_matchTrkZ->Fill(z); h1Pr_matchTrkE->Fill(track->P4().E());}
 
 
 	                        }
@@ -556,7 +556,7 @@ void AnalyseEvents(ExRootTreeReader *treeReader, TestPlots *plots)
 	                        {
 	
 	                                dualRICHagTrack = (Track*)branchdualRICHagTrack->At(E_PID[PIDi]);
-	                                if (track->Particle == dualRICHagTrack->Particle) {isMatch = 1; E_checkmatch[PIDi]=999;  ++matchE_PID; h1E_matchTrkZ->Fill(z); h1E_matchTrkE->Fill(track->P4().E());}
+	                                if (track->Particle.GetObject() == dualRICHagTrack->Particle.GetObject()) {isMatch = 1; E_checkmatch[PIDi]=999;  ++matchE_PID; h1E_matchTrkZ->Fill(z); h1E_matchTrkE->Fill(track->P4().E());}
 
 	                        }
 	                }
